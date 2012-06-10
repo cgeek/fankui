@@ -5,6 +5,7 @@
 	<meta name="language" content="en" />
 
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/base.css" />
+	<script src="<?php echo Yii::app()->request->baseUrl; ?>/assets/libs/seajs/1.1.0/sea.js"></script>
 	<!--[if lt IE 8]>
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ie.css" media="screen, projection" />
 	<![endif]-->
@@ -13,13 +14,15 @@
 <body>
 <div id="header" class="intro">
 	<div class="main">
-		<div class="logo"><a href="http://fankui.cc"><img src="http://fankui.cc/images/logo.gif" title="反馈网" alt="反馈网"></a></div>
+		<div class="logo"><a href="http://fankui.cc"><img src="http://fankui.cc/images/logo.png" width=210 title="反馈网" alt="反馈网"></a></div>
 		<ul class="main-menu">
 			<li class="at"><a href="/">首页</a></li>
+			<li><a href="/">获取代码</a></li>
 			<li><a href="/">产品介绍</a></li>
 			<li><a href="/">客户案例</a></li>
-			<li><a href="/">帮助</a></li>
-			<li><a href="/">博客</a></li>
+			<li><a href="/">使用帮助</a></li>
+			<li class="right"><a href="/user/register">注册</a></li>
+			<li class="right"><a href="/user/login">登录</a></li>
 <?php
 /*
 $this->widget('zii.widgets.CMenu',array(
@@ -34,6 +37,7 @@ $this->widget('zii.widgets.CMenu',array(
  */
 ?>
 		</ul>
+
 	</div>
 
 	<?php if(isset($this->breadcrumbs)):?>
@@ -46,7 +50,7 @@ $this->widget('zii.widgets.CMenu',array(
 <?php echo $content; ?>
 
 <div id="footer">
-	Copyright &copy; <?php echo date('Y'); ?> by fankui.cc.<br/>
+	Copyright &copy; <?php echo date('Y'); ?> by fankui.cc    
 	All Rights Reserved.<br/>
 </div><!-- footer -->
 

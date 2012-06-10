@@ -3,6 +3,9 @@
 		<a href="/user/register" title="立刻获取反馈代码" class="home-reg-button">立刻获取反馈代码</a>		
 	</div>
 </div>
+<div class="customers">
+	
+</div>
 <div class="main">
 
 <?php $this->pageTitle=Yii::app()->name; ?>

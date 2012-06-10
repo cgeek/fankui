@@ -4,9 +4,9 @@ if(window.Fankui_Feedback) {
 if(!window.Fankui_Feedback || !window.Fankui_Feedback.showPopupWidget) {
 	var FANKUI_CONFIGS = {
 		webhost:"http://fankui.cc",
-			apihost:"http://fankui.cc",
-				codehost:"http://fankui.cc/code",
-					pos:'right',
+		apihost:"http://fankui.cc",
+		codehost:"http://fankui.cc/code",
+		pos:'right',
 		app_key:0,
 		type:'right'
 	};
@@ -87,37 +87,37 @@ if(!window.Fankui_Feedback || !window.Fankui_Feedback.showPopupWidget) {
 			style:"right:-240px;",
 			innerHTML: render(box_template,{url:'http://fankui.cc/client/feedback?app_key=123'})
 		});
-		$FANKUI = {
-			showBox: function(){
-				var elem = d.getElementById("fankui_cc_right_box");
-				if(elem) {
-					elem.style.right = "0px";
-					var handle = d.getElementById("fkHandle");
+			$FANKUI = {
+				showBox: function(){
+					var elem = d.getElementById("fankui_cc_right_box");
+					if(elem) {
+						elem.style.right = "0px";
+						var handle = d.getElementById("fkHandle");
 
-					handle.onclick = "function(){$FANKUI.hideBox();}";
+						handle.onclick = "function(){$FANKUI.hideBox();}";
+					}
+				},
+				hideBox:function(){
+					var elem = d.getElementById("fankui_cc_right_box");
+
+					alert('hidebox');
+					if(elem) {
+						elem.style.right = "-240px";
+						var handle = d.getElementById("fkHandle");
+						handle.onclick = "function(){$FANKUI.showBox();}";
+					}
+				},
+				placeholder:function(){
+					console.log('placeholder');
+				},
+				submit:function(){
+
 				}
-			},
-			hideBox:function(){
-				var elem = d.getElementById("fankui_cc_right_box");
 
-				alert('hidebox');
-				if(elem) {
-					elem.style.right = "-240px";
-					var handle = d.getElementById("fkHandle");
-					handle.onclick = "function(){$FANKUI.showBox();}";
-				}
-			},
-			placeholder:function(){
-				console.log('placeholder');
-			},
-			submit:function(){
-
-			}
-
-		};
-		//console.log(box_template);
-		window.Fankui_Feedback= div;
-		//console.log("d"+d + " w:"+w + " isStrict:" + isStrict + dd + db + na + wlh + head + ie);
+			};
+			//console.log(box_template);
+			window.Fankui_Feedback= div;
+			//console.log("d"+d + " w:"+w + " isStrict:" + isStrict + dd + db + na + wlh + head + ie);
 	})();
 
 

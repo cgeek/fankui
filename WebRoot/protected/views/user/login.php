@@ -1,6 +1,6 @@
 <div class="home-main-top2">
 	<div class="main">
-		<span>注册用户</span>
+		<span>用户登录</span>
 	</div>
 </div>
 <div class="main home">
@@ -27,7 +27,7 @@
 			</form>
 		</div>
 		<div class="aside w300">
-			<p>已经有账号? <a href="/user/login">马上登录</a></p>
+			<p>还没有账号? <a href="/user/register">立即注册</a></p>
 		</div>
 	</div>
 </div>

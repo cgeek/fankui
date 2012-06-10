@@ -5,7 +5,7 @@ class ClientController extends Controller
 	public function actionFeedback()
 	{
 		$app_key = $_GET['app_key'];
-		$this->render('feedback');
+		$this->renderPartial('feedback');
 	}
 
 	// Uncomment the following methods and override them if needed
