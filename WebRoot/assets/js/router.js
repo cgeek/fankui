@@ -1,16 +1,17 @@
 (function(){
 
 	var alias = {
+		'jquery':'jquery/1.7.1/jquery',
+		'$':'jquery/1.7.1/jquery',
+		'underscore': 'underscore/1.2.1/underscore',
 		'es5-safe': 'es5-safe/0.9.2/es5-safe',
 		'json':'json/1.0.1/json',
-		'jquery':'jquery/1.7.1/jquery',
+		'cookie': 'cookie/1.0.2/cookie',
 		'mustache':'mustache/0.4.0/mustache',
-		'underscore': 'underscore/1.2.1/underscore',
-		'jquery.ui': 'jquery.ui/1.8.16/jquery.ui.js',
-		'jquery.ui.tabs': 'jquery.ui/1.8.16/jquery.ui.tabs.js',
-		'jquery.ui.autocomplete': 'jquery.ui/1.8.16/jquery.ui.autocomplete.js',
-		'masonry':'masonry/2.1.0/masonry',
-		'gmap3':'gmap3/4.1/gmap3',
+		//all plugins
+		'plugins': '../js/modules/plugins'
+		
+		
 
 	};
 
@@ -39,7 +40,7 @@
 			this.Json ? '':'json'
 		],
 		map:map,
-		base:'http://tuyou.me/assets/libs/'
+		base:'http://fankui.cc/assets/libs/'
 	});
 
 })();

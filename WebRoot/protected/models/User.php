@@ -14,6 +14,7 @@
  * @property string $avatar
  * @property integer $ctime
  * @property string $mtime
+ * @property string $last_login_time
  * @property integer $status
  */
 class User extends CActiveRecord
@@ -44,13 +45,14 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('user_name, password, email, website, province, description, avatar, ctime, mtime, status', 'required'),
+			array('password, email, ctime', 'required'),
 			array('ctime, status', 'numerical', 'integerOnly'=>true),
 			array('user_name, password', 'length', 'max'=>64),
 			array('email, website, province, description, avatar', 'length', 'max'=>255),
+			array('mtime, last_login_time', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('user_id, user_name, password, email, website, province, description, avatar, ctime, mtime, status', 'safe', 'on'=>'search'),
+			array('user_id, user_name, password, email, website, province, description, avatar, ctime, mtime, last_login_time, status', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -81,6 +83,7 @@ class User extends CActiveRecord
 			'avatar' => 'Avatar',
 			'ctime' => 'Ctime',
 			'mtime' => 'Mtime',
+			'last_login_time' => 'Last Login Time',
 			'status' => 'Status',
 		);
 	}
@@ -106,6 +109,7 @@ class User extends CActiveRecord
 		$criteria->compare('avatar',$this->avatar,true);
 		$criteria->compare('ctime',$this->ctime);
 		$criteria->compare('mtime',$this->mtime,true);
+		$criteria->compare('last_login_time',$this->last_login_time,true);
 		$criteria->compare('status',$this->status);
 
 		return new CActiveDataProvider($this, array(

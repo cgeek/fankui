@@ -6,7 +6,8 @@
 <div class="main home">
 	<div class="box page-account">
 		<div class="w520">
-			<form action="/user/register" method="post">
+			<form id="login_form" action="/user/login" method="post">
+				<p class="page-account-alert-message error"></p>
 				<input type="hidden" name="type" value="personal">
 				<fieldset>
 					<div class="clearfix">
@@ -19,10 +20,17 @@
 						<input type="password" size=30 id="password" name="password" value="">
 						<span class="help-inline"></span>
 					</div>
+					<div class="clearfix">
+						<div class="input">
+							<label>
+								<input type="checkbox" name="remember" value="1">
+								<span>一个月内自动登录</span>
+							</label>
+						</div>
+					</div>
 				</fieldset>
-
 				<div class="submit_btn">
-					<button type="submit" class="register_btn"></button>
+					<button type="submit" class="login_btn"></button>
 				</div>
 			</form>
 		</div>
@@ -31,3 +39,9 @@
 		</div>
 	</div>
 </div>
+
+<script type="text/javascript">
+seajs.use('/assets/js/router.js',function(router){
+	router.load('account');
+});
+</script>

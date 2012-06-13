@@ -6,7 +6,8 @@
 <div class="main home">
 	<div class="box page-account">
 		<div class="w520">
-			<form action="/user/register" method="post">
+			<form id="register_form" action="/user/register" method="post">
+				<p class="page-account-alert-message error"></p> 
 				<input type="hidden" name="type" value="personal">
 				<fieldset>
 					<div class="clearfix">
@@ -31,3 +32,9 @@
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+	seajs.use('/assets/js/router.js',function(router){
+		router.load('account');
+	});
+
+</script>

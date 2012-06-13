@@ -7,7 +7,7 @@ class UserController extends Controller
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
 	public $layout='//layouts/column2';
-
+	private $_identity = null;
 	/**
 	 * @return array action filters
 	 */
@@ -27,15 +27,15 @@ class UserController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','register','login'),
+				'actions'=>array('register','login','logout'),
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('home','setting','update'),
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
+				'actions'=>array('create','admin','delete'),
 				'users'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -43,13 +43,86 @@ class UserController extends Controller
 			),
 		);
 	}
+	public function actionHome()
+	{
+
+		$this->render('home');
+	}
+	public function actionSetting()
+	{
+		$this->render('setting');
+	}
 	public function actionLogin()
 	{
-		$this->render('login');
+		if(Yii::app()->request->isAjaxRequest) {
+			$email = $_POST['email'];
+			$password = $_POST['password'];
+			if(empty($email) || empty($password)) {
+				$this->ajax_response(false, "邮箱或者密码不能为空");
+			}
+			if($this->_identity===null)
+			{
+				$this->_identity=new UserIdentity($email,$password);
+				$this->_identity->authenticate();
+			}
+			if($this->_identity->errorCode === UserIdentity::ERROR_NONE)
+			{
+				$rememberMe = $_POST['remember'];
+				$duration=($rememberMe === 1) ? 3600*24*30 : 0; // 30 days
+
+				Yii::app()->user->login($this->_identity,$duration);
+				$this->ajax_response(true, "恭喜你，登录成功！");
+			} else {
+				if($this->_identity->errorCode === UserIdentity::ERROR_PASSWORD_INVALID) {
+					$this->ajax_response(false, "密码不正确，请重新输入");
+				} else if($this->_identity->errorCode === UserIdentity::ERROR_USERNAME_INVALID) { 
+					$this->ajax_response(false, "你输入的邮箱不正确，请重新输入");
+				}
+			}
+		} else {
+			if(Yii::app()->user->isGuest) {
+				$this->render('login');
+			} else {
+				$this->redirect(array('user/home'));
+			}
+		}
 	}
+
 	public function actionRegister()
 	{
-		$this->render('register');
+		if(Yii::app()->request->isAjaxRequest) {
+			$email = $_POST['email'];
+			$password = $_POST['password'];
+			if(empty($email) || empty($password)) {
+				$this->ajax_response(false, "邮箱或者密码不能为空");
+			}
+			$user = User::model()->find("email=:email",array(":email"=>$email));
+			if(!empty($user)) {
+				$this->ajax_response(false, "该邮箱已经使用，请换其他邮箱");
+			}
+			$user_model=new User;
+			$user_model->email = $email;
+			$user_model->password =  md5($password);
+			$user_model->user_name  = substr($email,0,strpos($email,"@"));
+			$user_model->ctime = time();
+			$success = false;
+			$message = "";
+			if($user_model->save()) {
+				$this->_identity=new UserIdentity($email,$password);
+				$this->_identity->authenticate();
+				Yii::app()->user->login($this->_identity,3600*24*30);
+				$this->ajax_response(true, "恭喜你注册成功!");
+			} else {
+				$this->ajax_response(false, "注册失败，请重新注册");
+			}
+		} else {
+			$this->render('register');
+		}
+	}
+	
+	public function actionLogout()
+	{
+		Yii::app()->user->logout();
 	}
 	/**
 	 * Displays a particular model.

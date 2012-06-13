@@ -15,14 +15,23 @@
 <div id="header" class="intro">
 	<div class="main">
 		<div class="logo"><a href="http://fankui.cc"><img src="http://fankui.cc/images/logo.png" width=210 title="反馈网" alt="反馈网"></a></div>
+		<ul class="right-menu">
+<?php if(!Yii::app()->user->isGuest):?>
+			<li> |&nbsp;&nbsp;&nbsp;&nbsp; <a href="/user/logout">退出</a></li>
+			<li> |&nbsp;&nbsp; <a href="/user/setting">账号设置</a></li>
+			<li>  <a href="/user/home">cgeek</a></li>
+<?php endif;?>
+		</ul>
 		<ul class="main-menu">
 			<li class="at"><a href="/">首页</a></li>
 			<li><a href="/">获取代码</a></li>
 			<li><a href="/">产品介绍</a></li>
 			<li><a href="/">客户案例</a></li>
 			<li><a href="/">使用帮助</a></li>
+		<?php if(Yii::app()->user->isGuest):?>
 			<li class="right"><a href="/user/register">注册</a></li>
 			<li class="right"><a href="/user/login">登录</a></li>
+		<?php endif;?>
 <?php
 /*
 $this->widget('zii.widgets.CMenu',array(
